@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Recognition Experiment</title>
+    <link rel="stylesheet" href="style.css"> <!-- 引用外部 CSS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/jspsych@6.3.1/jspsych.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspsych@6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspsych@6.3.1/css/jspsych.css">
+</head>
+<body>
+    <div class="experiment-container" id="jspsych-target">
+        <script>
+            // 创建一个时间线数组
+            var timeline = [];
+
+            // 设置实验欢迎界面
+            var welcome = {
+                type: "html-keyboard-response",
+                stimulus: "<p>欢迎参加实验！</p><p>按任意键开始。</p>",
+                post_trial_gap: 1000 // 增加一个间隔以减少闪屏的可能性
+            };
+            timeline.push(welcome);
+
+            // 设置说明界面
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "<p>如果图片中的表情是高兴的，请按 'F' 键。</p>" +
+                          "<p>如果图片中的表情是悲伤的，请按 'J' 键。</p>" +
+                          "<p>按任意键继续。</p>",
+                post_trial_gap: 1000 // 增加一个间隔以减少闪屏的可能性
+            };
+            timeline.push(instructions);
+
+            // 设置图片试次
+            var test_stimuli = [
+                { stimulus: 'ha_sa1.png' },
+                { stimulus: 'ha_sa2.png' },
+                { stimulus: 'ha_sa3.png' },
+                { stimulus: 'ha_sa4.png' },
+                { stimulus: 'ha_sa5.png' },
+                { stimulus: 'ha_sa6.png' }
+            ];
+
+            // 生成试次数组，每个图片随机出现5次
+            var trials = [];
+            for (var i = 0; i < 5; i++) {
+                jsPsych.randomization.shuffle(test_stimuli).forEach(function(item) {
+                    trials.push(item);
+                });
+            }
+
+            // 创建图片试次
+            var test = {
+                type: "image-keyboard-response",
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                choices: ['f', 'j'],
+                data: {
+                    image: jsPsych.timelineVariable('stimulus')
+                },
+                on_finish: function(data){
+                    data.key_press = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
+                }
+            };
+
+            // 添加试次到时间线
+            var test_procedure = {
+                timeline: [test],
+                timeline_variables: trials
+            };
+            timeline.push(test_procedure);
+
+            // 设置结束界面
+            var debrief = {
+                type: "html-keyboard-response",
+                stimulus: function() {
+                    return "<p>实验结束，感谢参与！</p>" +
+                           "<p>按任意键退出。</p>";
+                },
+                on_finish: function() {
+                    var csv = jsPsych.data.get().csv();
+                    var blob = new Blob([csv], { type: 'text/csv' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'experiment_data.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            };
+            timeline.push(debrief);
+
+            // 开始实验
+            jsPsych.init({
+                timeline: timeline,
+                display_element: 'jspsych-target'
+            });
+        </script>
+    </div>
+</body>
+</html>
