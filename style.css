@@ -1,0 +1,37 @@
+/* 确保页面和容器占满整个浏览器窗口，并禁止滚动条 */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 定义实验容器的布局和样式 */
+.experiment-container {
+    width: 100%;
+    max-width: 1200px; /* 增大最大宽度以确保文本不换行 */
+    text-align: center;
+    padding: 20px; /* 增加内边距以防止文字靠边 */
+}
+
+/* jsPsych 内容居中对齐 */
+.jspsych-content {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    text-align: center; /* 居中文本 */
+    white-space: nowrap; /* 防止文本换行 */
+}
+
+/* jsPsych 显示元素居中 */
+.jspsych-display-element {
+    margin: 0 auto;
+}
+
+/* 图片最大宽度和高度 */
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
