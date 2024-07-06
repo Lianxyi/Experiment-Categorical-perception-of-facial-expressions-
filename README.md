@@ -8,9 +8,11 @@
 
 ## 实验材料
 
-​    面部表情类别知觉研究的实验材料是物理刺激均匀变化的表情连续体，连续体两端是两种不同表情的原型，如快乐—悲伤连续体。将连续体分为 n 个等距的刺激材料。本实验中采用的实验材料是将快乐—悲伤连续体分为6张等距变化的面部表情，如下图。
+​    面部表情类别知觉研究的实验材料是物理刺激均匀变化的表情连续体，连续体两端是两种不同表情的原型，如快乐—悲伤连续体。将连续体分为 n 个等距的刺激材料。本实验中采用的实验材料是将快乐—悲伤连续体分为6张等距变化的面部表情，如图1。
 
-<img src="C:\Users\lxy\AppData\Roaming\Typora\typora-user-images\image-20240705164951772.png" alt="image-20240705164951772" style="zoom: 80%;" />
+<img src="E:\code\experiment_test\stimuli\图1.png" style="zoom:80%;" />
+
+​                                                                                                                图1
 
 ## 实验程序
 
@@ -215,8 +217,9 @@ jsPsych.init({
 
 ## 数据结果和分析
 
-数据结果将存储于csv格式的文件中。分别计算被试选择高兴和难过表情的比率并绘制结果图（如下图示例）。
+数据结果将存储于csv格式的文件中。分别计算被试选择高兴和难过表情的比率并绘制结果图（如图2示例）。
 
-<img src="C:\Users\lxy\AppData\Roaming\Typora\typora-user-images\image-20240705204538636.png" alt="image-20240705204538636" style="zoom:80%;" />
+<img src="E:\code\experiment_test\stimuli\图2.png" style="zoom:80%;" />
 
-​                                                                    
+​                                                                                                                        图2
+
